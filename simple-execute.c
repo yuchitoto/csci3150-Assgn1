@@ -14,7 +14,7 @@ int shell_execute(char ** args, int argc)
 	if ( strcmp(args[0], "EXIT") == 0 )
 		return -1;
 
-	printf("%s\n",args);
+	printf("%s\n",*args);
 
 	if( (child_pid = fork()) < 0 ){
 		printf("fork() error \n");
