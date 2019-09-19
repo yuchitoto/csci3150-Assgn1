@@ -55,6 +55,7 @@ int main(){
                         signal(SIGCHLD,SIG_IGN);
                         if(fork()==0){ /*child process: call execvp if cmd.at(i) is "|" or is the last word*/
                                 if(i==cmd.size()-1){
+                                  //cmd is some string array
                                         close(p1[1]);
                                         dup2(p1[0],STDIN_FILENO); /*p1 will close after STDIN receive EOF*/
                                         close(p1[0]);

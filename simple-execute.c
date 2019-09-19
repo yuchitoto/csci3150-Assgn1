@@ -11,6 +11,7 @@ int shell_execute(char ** args, int argc)
 {
 	int child_pid, wait_return, status;
 	int p1[2], p2[2];
+	char **arg1, **arg2;
 
 	if(pipe(p1)<0)
 	{
@@ -34,6 +35,20 @@ int shell_execute(char ** args, int argc)
 		i++;
 	}
 	printf("\n");
+
+	i = 0;
+	int k=0;
+	arg1 = (char**)malloc(sizeof(char*));
+	while(args[i]!=NULL)
+	{
+		arg2 = (char**)realloc(arg1,(++k) * sizeof(char*));
+		free(arg1);
+		arg1=arg2;
+		if(args[i] == "|" || args[i+1] == NULL)
+		{
+			//fork process
+		}
+	}
 
 	if( (child_pid = fork()) < 0 ){
 		printf("fork() error \n");
