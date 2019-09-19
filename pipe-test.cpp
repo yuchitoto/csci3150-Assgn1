@@ -1,3 +1,5 @@
+//from http://burweisnote.blogspot.com/2017/10/pipe.html?m=1
+
 //pipe_test.cpp
 #include <unistd.h>
 #include <iostream>
