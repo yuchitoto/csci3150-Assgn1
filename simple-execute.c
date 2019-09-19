@@ -10,6 +10,19 @@
 int shell_execute(char ** args, int argc)
 {
 	int child_pid, wait_return, status;
+	int p1[2], p2[2];
+
+	if(pipe(p1)<0)
+	{
+		printf("Pipe1 not created\nEXIT\n");
+		exit(-1);
+	}
+
+	if(pipe(p2)<0)
+	{
+		printf("Pipe2 not created\nEXIT\n");
+		exit(-1);
+	}
 
 	if ( strcmp(args[0], "EXIT") == 0 )
 		return -1;
