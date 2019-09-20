@@ -103,8 +103,12 @@ int shell_execute(char ** args, int argc)
 				close(STDOUT_FILENO);
 				dup(p1[1]);
 				close(p1[1]);
-				printf("%s",buf);
-				dup(stdout_copy);gF
+				write(p1[1],buf,BUFF_SIZE);
+				dup(stdout_copy);
+
+				if(wait_return = wait(&status) < 0)
+					printf("wait() error\n");
+
 				if(args[i+1]!=NULL)
 				{
 					memset(buf, 0, sizeof(buf));
@@ -115,7 +119,7 @@ int shell_execute(char ** args, int argc)
 		}
 	}
 
-	if( (child_pid = fork()) < 0 ){
+	/*if( (child_pid = fork()) < 0 ){
 		printf("fork() error \n");
 	}else if (child_pid == 0 ){
 		if ( execvp(args[0], args) < 0){
@@ -125,7 +129,7 @@ int shell_execute(char ** args, int argc)
 	}else{
 		if ( (wait_return = wait(&status) ) < 0 )
 			printf("wait() error \n");
-	}
+	}*/
 
 	return 0;
 
