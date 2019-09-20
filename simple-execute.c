@@ -63,7 +63,7 @@ int shell_execute(char ** args, int argc)
 			}
 			else if(child_pid == 0) //fork success child
 			{
-				if(args[i] == "|")
+				if(strcmp(args[i], "|"))
 				{
 					close(p1[1]);
 					close(STDIN_FILENO);
@@ -107,7 +107,7 @@ int shell_execute(char ** args, int argc)
 				dup(stdout_cp);
 
 				if(wait_return = wait(&status) < 0)
-					printf("wait() error\n");
+					write(stdout_cp,"wait() error\n",13);
 
 				if(args[i+1]!=NULL)
 				{
