@@ -104,7 +104,7 @@ int shell_execute(char ** args, int argc)
 				dup(p1[1]);
 				close(p1[1]);
 				printf("%s",buf);
-				dup(stdout_copy);gF
+				dup(stdout_copy);
 				if(args[i+1]!=NULL)
 				{
 					memset(buf, 0, sizeof(buf));
