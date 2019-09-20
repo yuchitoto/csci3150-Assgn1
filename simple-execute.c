@@ -5,6 +5,8 @@
 #include <errno.h>
 #include <unistd.h>
 
+#define BUFF_SIZE 65535
+
 //strcpy to some other array untill | or \0 met
 
 int shell_execute(char ** args, int argc)
@@ -12,6 +14,10 @@ int shell_execute(char ** args, int argc)
 	int child_pid, wait_return, status;
 	int p1[2], p2[2];
 	char **poi;
+	char buf[BUFF_SIZE] = {0};
+
+	int const stdout_cp = dup(STDOUT_FILENO);
+	int const stdin_cp = dup(STDIN_FILENO);
 
 	if(pipe(p1)<0)
 	{
@@ -43,23 +49,66 @@ int shell_execute(char ** args, int argc)
 		if(args[i] == "|" || args[i+1] == NULL)
 		{
 			j=i-1;
-			poi = (char**)malloc((j-k+1)*sizeof(char*));
+			poi = (char**)malloc((j-k+2)*sizeof(char*));
 			for(int me = 0; me<=j-k; me++)
 			{
 				*poi = (char*)malloc(sizeof(args[me]));
 				strcpy(poi[me],args[me+k]);
 			}
+			poi[j-k+1]=NULL;
 			//process forking
 			if((child_pid = fork()) < 0)
 			{
 				printf("fork() error\n");
 			}
-			else //fork success
+			else if(child_pid == 0) //fork success child
 			{
-				if(execvp(poi[0], poi)<0)
+				if(args[i] == "|")
 				{
-					printf("execvp() error\n");
-					exit(-1);
+					close(p1[1]);
+					close(STDIN_FILENO);
+					dup(p1[0]);
+					close(p2[0]);
+					close(STDOUT_FILENO);
+					dup(p2[1]);
+					if(execvp(poi[0], poi)<0)
+					{
+						printf("execvp() error\n");
+						exit(-1);
+					}
+					else
+						exit(0);
+				}
+				else
+				{
+					close(p1[1]);
+					close(STDIN_FILENO);
+					dup(p1[0]);
+					close(p1[0]);
+					close(p2[1]);
+					close(p2[0]);
+					if(execvp(poi[0],poi)<0)
+					{
+						printf("execvp() error\n");
+						exit(-1);
+					}
+					else
+						exit(0);
+				}
+			}
+			else
+			{
+				//parent
+				close(p1[0]);
+				close(STDOUT_FILENO);
+				dup(p1[1]);
+				close(p1[1]);
+				printf("%s",buf);
+				dup(stdout_copy);gF
+				if(args[i+1]!=NULL)
+				{
+					memset(buf, 0, sizeof(buf));
+					read(p2[0], buf, sizeof(buf));
 				}
 			}
 			//update index

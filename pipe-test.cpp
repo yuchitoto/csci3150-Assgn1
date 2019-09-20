@@ -88,9 +88,11 @@ int main(){
                                 close(p1[0]);
                                 dup2(p1[1],STDOUT_FILENO);
                                 close(p1[1]);
-                                std::cout << pipe_buff << std::flush;
-				//close(STDOUT_FILENO);
-				//dup(stdout_copy);
+                                //std::cout << pipe_buff << std::flush;
+                                //deleting flush will cause intermediate command results to display
+                                printf("%s",pipe_buff);//test
+                                //close(STDOUT_FILENO);
+                                //dup(stdout_copy);
                                 dup2(stdout_copy,STDOUT_FILENO); /*p1 write end isn't used anymore, send EOF*/
                                 close(p2[1]);
                                 if(i<cmd.size()-1){
