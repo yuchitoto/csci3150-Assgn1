@@ -10,6 +10,7 @@
 #include <vector>
 #include <algorithm>
 #include <sys/wait.h>
+#include <cstdio>
 
 #define MAX_WORDS_IN_LINE 1000
 #define BUFF_SIZE 100000
@@ -87,10 +88,9 @@ int main(){
                         }else{ /*parent process: pass old data to the new child and store new data*/
                                 close(p1[0]);
                                 dup2(p1[1],STDOUT_FILENO);
-                                close(p1[1]);
-                                //std::cout << pipe_buff << std::flush;
+				close(p1[1]);
+                                std::cout << pipe_buff << std::flush;
                                 //deleting flush will cause intermediate command results to display
-                                write(STDOUT_FILENO,pipe_buff,BUFF_SIZE);//test
                                 //close(STDOUT_FILENO);
                                 //dup(stdout_copy);
                                 dup2(stdout_copy,STDOUT_FILENO); /*p1 write end isn't used anymore, send EOF*/
