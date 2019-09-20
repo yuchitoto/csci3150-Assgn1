@@ -103,7 +103,7 @@ int shell_execute(char ** args, int argc)
 				close(STDOUT_FILENO);
 				dup(p1[1]);
 				close(p1[1]);
-				printf("%s",buf);
+				write(p1[1],buf,BUFF_SIZE);
 				dup(stdout_copy);
 				if(args[i+1]!=NULL)
 				{
