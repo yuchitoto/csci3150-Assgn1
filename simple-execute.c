@@ -46,7 +46,7 @@ int shell_execute(char ** args, int argc)
 	int k=0, j;
 	while(args[i]!=NULL)
 	{
-		if(args[i] == "|" || args[i+1] == NULL)
+		if(strcmp(args[i],"|") || args[i+1] == NULL)
 		{
 			j=i-1;
 			poi = (char**)malloc((j-k+2)*sizeof(char*));
@@ -104,7 +104,7 @@ int shell_execute(char ** args, int argc)
 				dup(p1[1]);
 				close(p1[1]);
 				write(p1[1],buf,BUFF_SIZE);
-				dup(stdout_copy);
+				dup(stdout_cp);
 
 				if(wait_return = wait(&status) < 0)
 					printf("wait() error\n");
