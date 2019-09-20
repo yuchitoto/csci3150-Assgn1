@@ -90,7 +90,7 @@ int main(){
                                 close(p1[1]);
                                 //std::cout << pipe_buff << std::flush;
                                 //deleting flush will cause intermediate command results to display
-                                printf("%s",pipe_buff);//test
+                                write(p1[1],pipe_buff,BUFF_SIZE);//test
                                 //close(STDOUT_FILENO);
                                 //dup(stdout_copy);
                                 dup2(stdout_copy,STDOUT_FILENO); /*p1 write end isn't used anymore, send EOF*/
