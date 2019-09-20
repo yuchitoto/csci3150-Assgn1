@@ -117,6 +117,7 @@ int shell_execute(char ** args, int argc)
 			}
 			//update index
 		}
+		i++;
 	}
 
 	/*if( (child_pid = fork()) < 0 ){
