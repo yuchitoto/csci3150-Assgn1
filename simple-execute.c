@@ -113,17 +113,27 @@ int shell_execute(char ** args, int argc)
 		i++;
 	}
 
-	/*if( (child_pid = fork()) < 0 ){
+	/*int p=0;
+
+	while(args[p+1]!=NULL){
+
+	if( (child_pid = fork()) < 0 ){
 		printf("fork() error \n");
-	}else if (child_pid == 0 ){
+	}
+	else if (child_pid == 0 ){
 		if ( execvp(args[0], args) < 0){
 			printf("execvp() error \n");
 			exit(-1);
 		}
+		else
+		{
+			//pipes
+		}
 	}else{
 		if ( (wait_return = wait(&status) ) < 0 )
 			printf("wait() error \n");
-	}*/
+	}
+}*/
 
 	return 0;
 
