@@ -19,18 +19,6 @@ int shell_execute(char ** args, int argc)
 	int const stdout_cp = dup(STDOUT_FILENO);
 	int const stdin_cp = dup(STDIN_FILENO);
 
-	if(pipe(p1)<0)
-	{
-		printf("Pipe1 not created\nEXIT\n");
-		exit(-1);
-	}
-
-	if(pipe(p2)<0)
-	{
-		printf("Pipe2 not created\nEXIT\n");
-		exit(-1);
-	}
-
 	if ( strcmp(args[0], "EXIT") == 0 )
 		return -1;
 
@@ -56,6 +44,11 @@ int shell_execute(char ** args, int argc)
 				strcpy(poi[me],args[me+k]);
 			}
 			poi[j-k+1]=NULL;
+
+			if(pipe(p1)<0)
+				printf("Create pipe1 error!\n");
+			if(pipe(p2)<0)
+				printf("Create pipe2 error\n");
 			//process forking
 			if((child_pid = fork()) < 0)
 			{
