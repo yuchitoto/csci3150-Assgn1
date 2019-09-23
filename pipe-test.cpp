@@ -88,7 +88,7 @@ int main(){
                         }else{ /*parent process: pass old data to the new child and store new data*/
                                 close(p1[0]);
                                 dup2(p1[1],STDOUT_FILENO);
-				close(p1[1]);
+				                        close(p1[1]);
                                 std::cout << pipe_buff << std::flush;
                                 //deleting flush will cause intermediate command results to display
                                 //close(STDOUT_FILENO);

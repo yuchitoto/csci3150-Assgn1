@@ -37,18 +37,22 @@ int shell_execute(char ** args, int argc)
 		if(strcmp(args[i],"|") || args[i+1] == NULL)
 		{
 			j=i-1;
-			poi = (char**)malloc((j-k+2)*sizeof(char*));
 			for(int me = 0; me<=j-k; me++)
 			{
-				*poi = (char*)malloc(sizeof(args[me]));
-				strcpy(poi[me],args[me+k]);
+				poi[me] = strdup(args[me+k]);
 			}
-			poi[j-k+1]=NULL;
+			k = i+1;
 
 			if(pipe(p1)<0)
+			{
 				printf("Create pipe1 error!\n");
+				exit(-3);
+			}
 			if(pipe(p2)<0)
-				printf("Create pipe2 error\n");
+			{
+				printf("Create pipe2 error!\n");
+				exit(-3);
+			}
 			//process forking
 			if((child_pid = fork()) < 0)
 			{
@@ -96,7 +100,10 @@ int shell_execute(char ** args, int argc)
 				close(STDOUT_FILENO);
 				dup(p1[1]);
 				close(p1[1]);
+
 				write(p1[1],buf,BUFF_SIZE);
+				fsync(p1[1]);
+
 				dup(stdout_cp);
 
 				if(wait_return = wait(&status) < 0)
