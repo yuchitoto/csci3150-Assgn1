@@ -37,11 +37,11 @@ int shell_execute(char ** args, int argc)
 		if(strcmp(args[i],"|") || args[i+1] == NULL)
 		{
 			j=i-1;
+			poi = malloc((j-k+1)*sizeof(char*));
 			for(int me = 0; me<=j-k; me++)
 			{
 				poi[me] = strdup(args[me+k]);
 			}
-			k = i+1;
 
 			if(pipe(p1)<0)
 			{
@@ -114,6 +114,10 @@ int shell_execute(char ** args, int argc)
 					memset(buf, 0, sizeof(buf));
 					read(p2[0], buf, sizeof(buf));
 				}
+				for(int me=0;me<=j-k;me++)
+					free(poi[me]);
+				k=i+1;
+				free(poi);
 			}
 			//update index
 		}
