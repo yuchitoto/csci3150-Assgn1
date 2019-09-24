@@ -34,7 +34,7 @@ int shell_execute(char ** args, int argc)
 	for(int u=0;u<i;u++) //tested SIGPIPE broken pipe detected
 	{
 		//unlimited loop
-		if(strcmp(args[u],"|") || u==i) //if args[u] equals to | than strcmp will return 0 so the if statement will fail
+		if(strcmp(args[u],"|") == 0 || u==i) //I thought it is just like bool, and forgot it is cmp
 		{
 			j=u-1;
 			poi = malloc((j-k+1)*sizeof(char*));
