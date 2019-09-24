@@ -34,6 +34,7 @@ int shell_execute(char ** args, int argc)
 	int k=0, j;
 	while(args[i]!=NULL)
 	{
+		//unlimited loop
 		if(strcmp(args[i],"|") || args[i+1] == NULL)
 		{
 			j=i-1;
