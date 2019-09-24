@@ -31,7 +31,7 @@ int shell_execute(char ** args, int argc)
 	printf("\n");
 
 	int k=0, j;
-	for(int u=0;u<i;u++) //tested SIGPIPE broken pipe detected
+	for(int u=0;u<=i;u++) //tested SIGPIPE broken pipe detected
 	{
 		//unlimited loop
 		if(strcmp(args[u],"|") == 0 || u==i) //I thought it is just like bool, and forgot it is cmp
