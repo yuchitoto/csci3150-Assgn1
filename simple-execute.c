@@ -42,7 +42,7 @@ int shell_execute(char ** args, int argc)
 			{
 				poi[me] = strdup(args[me+k]);
 			}
-
+ 			//should add poi[me]=NULL;for execvp?becuase it needs a null-terminated
 			if(pipe(p1)<0)
 			{
 				printf("Create pipe1 error!\n");
