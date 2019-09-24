@@ -60,7 +60,7 @@ int shell_execute(char ** args, int argc)
 			}
 			else if(child_pid == 0) //fork success child
 			{
-				if(strcmp(args[u], "|"))
+				if(strcmp(args[u], "|"))//if args[u]="|",the return value is 0,so the if statement is false
 				{
 					close(p1[1]);
 					close(STDIN_FILENO);
