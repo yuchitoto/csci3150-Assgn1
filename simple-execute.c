@@ -31,7 +31,7 @@ int shell_execute(char ** args, int argc)
 	printf("\n");
 
 	int k=0, j;
-	for(int u=0;u<i;u++)
+	for(int u=0;u<i;u++) //tested SIGPIPE broken pipe detected
 	{
 		//unlimited loop
 		if(strcmp(args[u],"|") || u==i)

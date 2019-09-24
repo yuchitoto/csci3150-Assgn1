@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS= -Wall
+CFLAGS= -g -Wall
 
 SimpleShell: simple-shell.o simple-execute.o
 		$(CC) $(CFLAGS) -o SimpleShell simple-shell.o simple-execute.o
