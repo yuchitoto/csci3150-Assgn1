@@ -30,14 +30,13 @@ int shell_execute(char ** args, int argc)
 	}
 	printf("\n");
 
-	i = 0;
 	int k=0, j;
-	while(args[i]!=NULL)
+	for(int u=0;u<i;u++)
 	{
 		//unlimited loop
-		if(strcmp(args[i],"|") || args[i+1] == NULL)
+		if(strcmp(args[u],"|") || u==i)
 		{
-			j=i-1;
+			j=u-1;
 			poi = malloc((j-k+1)*sizeof(char*));
 			for(int me = 0; me<=j-k; me++)
 			{
@@ -61,7 +60,7 @@ int shell_execute(char ** args, int argc)
 			}
 			else if(child_pid == 0) //fork success child
 			{
-				if(strcmp(args[i], "|"))
+				if(strcmp(args[u], "|"))
 				{
 					close(p1[1]);
 					close(STDIN_FILENO);
@@ -122,7 +121,6 @@ int shell_execute(char ** args, int argc)
 			}
 			//update index
 		}
-		i++;
 	}
 
 	/*int p=0;
