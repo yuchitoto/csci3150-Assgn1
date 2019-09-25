@@ -48,10 +48,10 @@ void shell_execute1(char ** args, int argc)
 	printf("%d\n", argc);
 
 	int k=0, j;
-	for(int u=0;u<=argc;u++) //detected SIGSEG
+	for(int u=0;u<argc;u++) //detected SIGSEG
 	{
 		//unlimited loop
-		if(strcmp(args[u],"|") == 0 || u==argc) //if compare a NULL array there will be segmentation fault
+		if(strcmp(args[u],"|") == 0 || u==argc-1) //if compare a NULL array there will be segmentation fault
 		{
 			j=u-1;
 			poi = malloc((j-k+2)*sizeof(char*));
