@@ -43,6 +43,9 @@ int shell_execute(char ** args, int argc)
 				poi[me] = strdup(args[me+k]);
 			}
 			poi[j+1] = NULL;
+
+			for(int a=0;a<(j-k+2);a++)
+				printf("%s\n",poi[a]);
  			//should add poi[me]=NULL;for execvp?becuase it needs a null-terminated
 			if(pipe(p1)<0)
 			{
