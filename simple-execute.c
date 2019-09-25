@@ -45,10 +45,10 @@ void shell_execute1(char ** args, int argc)
 	printf("%d\n", argc);
 
 	int k=0, j;
-	for(int u=0;u<argc-1;u++) //detected SIGSEG
+	for(int u=0;u<argc-1;u++) //detected SIGPIPE
 	{
 		printf("%s\n",(args[u]==NULL)?"someNULL":args[u]);
-		if(strcmp(args[u],"|") == 0 || u==argc-2) //if compare a NULL array there will be segmentation fault
+		if(strcmp(args[u],"|") == 0 || u==argc-2) //SIGSEGV fixed, keep argc-2 would be fine
 		{
 			j=u-1;
 			poi = malloc((j-k+2)*sizeof(char*));
@@ -58,9 +58,6 @@ void shell_execute1(char ** args, int argc)
 			}
 			poi[j+1] = NULL;
 
-			for(int a=0;a<(j-k+2);a++)
-				printf("%s\n",(poi[a]==NULL)?"someNULL":poi[a]);
- 			//should add poi[me]=NULL;for execvp?becuase it needs a null-terminated
 			if(pipe(p1)<0)
 			{
 				printf("Create pipe1 error!\n");
