@@ -5,7 +5,7 @@
 #include <errno.h>
 #include <unistd.h>
 #define MAX_LINE_SIZE 1024
-#define MAX_ARG_NUM  10 
+#define MAX_ARG_NUM  10
 #define BUFF_SIZE 100000
 int shell_execute(char **args, int argc)
 {
@@ -122,8 +122,9 @@ int shell_execute(char **args, int argc)
                 if(pid2==0)
                 {
                     //grand child
-                    //dup(p1[1]);close(STDOUT_FILENO);
-                    dup2(p1[1],STDOUT_FILENO);
+										close(STDOUT_FILENO);
+										dup(p1[1]);
+                    //dup2(p1[1],STDOUT_FILENO);
                     close(p1[1]);
                     close(p1[0]);close(p2[1]);close(p2[0]);
                     if(execvp(poi1[0],poi1)<0)
@@ -136,10 +137,12 @@ int shell_execute(char **args, int argc)
                 {
                     //child
                     //wait(&pid2);
-                    //dup(p1[0]);close(STDIN_FILENO);
-                    //dup(p2[1]);close(STDOUT_FILENO);
-                    dup2(p1[0],STDIN_FILENO);
-                    dup2(p2[1],STDOUT_FILENO);
+										close(STDOUT_FILENO);
+										dup(p1[0]);
+										//dup2(p1[0],STDIN_FILENO);
+										close(STDOUT_FILENO);
+										dup(p2[1]);
+                    //dup2(p2[1],STDOUT_FILENO);
                     close(p1[0]);close(p2[1]);close(p1[1]);
                     close(p2[0]);
                     if(execvp(poi2[0],poi2)<0)
@@ -148,13 +151,14 @@ int shell_execute(char **args, int argc)
                         exit(-1);
                     }
                 }
-                
+
             }
             else
             {
                 //parent
-                //dup(p2[0]);close(STDIN_FILENO);
-                dup2(p2[0],STDIN_FILENO);
+								close(STDIN_FILENO);
+								dup(p2[0]);
+                //dup2(p2[0],STDIN_FILENO);
                 close(p2[0]);close(p2[1]);close(p1[0]);close(p1[1]);
                 if(execvp(poi3[0],poi3)<0)
                 {
