@@ -13,6 +13,14 @@ int shell_execute(char ** args, int argc)
 {
 	int child_pid, wait_return, status;
 
+	int i=0;
+	while(args[i]!=NULL)
+	{
+		printf("%s\n",args[i]);
+		i++;
+	}
+	printf("%d",argc);
+
 	if ( strcmp(args[0], "EXIT") == 0 )
 		return -1;
 
