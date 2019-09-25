@@ -204,6 +204,7 @@ void shell_execute2(char **args, int argc)
 							k++;
 						}
             str1[k]=NULL;
+						printf("finished first copy\n");
 
             k++;
 						str2 = malloc((argc-k+2)*sizeof(char*));
@@ -211,6 +212,7 @@ void shell_execute2(char **args, int argc)
             {
                 str2[l]=args[k];
             }
+						printf("finished second copy\n");
 
             if(pipe(p1)<0)
             {
@@ -274,13 +276,14 @@ void shell_execute2(char **args, int argc)
             str2[n]=NULL;
             m++;
 
-						printf("finished second copy");
+						printf("finished second copy\n");
 
 						str3 = malloc((argc-m+1)*sizeof(char*));
             for(n=0;m<argc;m++,n++)
             {
               str3[n]=args[m];
             }
+						printf("finished third copy\n");
 
             if(pipe(p1)<0)
             {
