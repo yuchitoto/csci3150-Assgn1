@@ -51,7 +51,7 @@ void shell_execute1(char ** args, int argc)
 	for(int u=0;u<=i;u++) //detected SIGSEG
 	{
 		//unlimited loop
-		if(strcmp(args[u],"|") == 0 || u==i) //I thought it is just like bool, and forgot it is cmp
+		if(strcmp(args[u],"|") == 0 || u==i) //if compare a NULL array there will be segmentation fault 
 		{
 			j=u-1;
 			poi = malloc((j-k+2)*sizeof(char*));
