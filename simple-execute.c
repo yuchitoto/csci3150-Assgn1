@@ -165,7 +165,7 @@ void shell_execute1(char ** args, int argc)
 
 }
 
-int shell_execute2(char **args, int argc)
+void shell_execute2(char **args, int argc)
 {
 int counter=0,p1[2],p2[2],count=argc-1,ret,pid1,pid2;
     char ** poi1;
@@ -326,5 +326,4 @@ int counter=0,p1[2],p2[2],count=argc-1,ret,pid1,pid2;
 		printf("Input command out of bound!\n");
 		exit(-99);
 	}
-    return 0;
 }
