@@ -19,7 +19,7 @@ int shell_execute(char ** args, int argc)
 		printf("%s\n",args[i]);
 		i++;
 	}
-	printf("%d",argc);
+	printf("%d\n",argc);
 
 	if ( strcmp(args[0], "EXIT") == 0 )
 		return -1;
