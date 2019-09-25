@@ -37,11 +37,12 @@ int shell_execute(char ** args, int argc)
 		if(strcmp(args[u],"|") == 0 || u==i) //I thought it is just like bool, and forgot it is cmp
 		{
 			j=u-1;
-			poi = malloc((j-k+1)*sizeof(char*));
+			poi = malloc((j-k+2)*sizeof(char*));
 			for(int me = 0; me<=j-k; me++)
 			{
 				poi[me] = strdup(args[me+k]);
 			}
+			poi[j+1] = NULL;
  			//should add poi[me]=NULL;for execvp?becuase it needs a null-terminated
 			if(pipe(p1)<0)
 			{
