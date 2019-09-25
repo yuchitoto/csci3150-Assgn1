@@ -307,7 +307,7 @@ int counter=0,p1[2],p2[2],count=argc-1,ret,pid1,pid2;
             {
                 //parent
 		//should I wait here?
-		//wait(&sid1);
+		//wait(&pid1);
                 dup(p2[0]);close(STDIN_FILENO);close(p2[0]);//help me check..again
                 close(p2[1]);close(p1[0]);close(p1[1]);
                 if(execvp(poi3[0],poi3)<0)
