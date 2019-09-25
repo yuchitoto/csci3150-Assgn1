@@ -4,12 +4,14 @@
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
-#define MAX_ARG_NUM  10 
+#define MAX_ARG_NUM  10
 #define BUFF_SIZE 65535
 
 //strcpy to some other array untill | or \0 met
 
 void shell_execute1(char **args, int argc);
+
+void shell_execute2(char **args, int argc);
 
 int shell_execute(char ** args, int argc)
 {
@@ -18,7 +20,7 @@ int shell_execute(char ** args, int argc)
 	if ( strcmp(args[0], "EXIT") == 0 )
 		return -1;
 
-	shell_execute1(args, argc);
+	shell_execute2(args, argc);
 
 	return 0;
 
@@ -301,7 +303,7 @@ int counter=0,p1[2],p2[2],count=argc-1,ret,pid1,pid2;
                         exit(-1);
                     }
                 }
-                
+
             }
             else
             {
