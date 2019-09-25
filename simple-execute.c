@@ -262,6 +262,8 @@ void shell_execute2(char **args, int argc)
             str1[m]=NULL;
             m++;
 
+						printf("finished first copy\n");
+
             while(strcmp(args[m], "|") != 0)
             {
 							tmp = realloc(str2, (n+2)*sizeof(char*));
@@ -271,6 +273,8 @@ void shell_execute2(char **args, int argc)
             }
             str2[n]=NULL;
             m++;
+
+						printf("finished second copy");
 
 						str3 = malloc((argc-m+1)*sizeof(char*));
             for(n=0;m<argc;m++,n++)
