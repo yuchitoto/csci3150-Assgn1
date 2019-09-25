@@ -192,10 +192,12 @@ void shell_execute2(char **args, int argc)
 		}
 			break;
 		case 1:
+						char **tmp;
 						int k=0;
 						while(strcmp(args[k], "|") != 0)
 						{
-							str1 = realloc((k+2)*sizeof(char*));
+							tmp = realloc(str1, (k+2)*sizeof(char*));
+							str1 = tmp;
 							str1[k] = args[k];
 							k++;
 						}
@@ -247,9 +249,11 @@ void shell_execute2(char **args, int argc)
 			break;
 		case 2:
             int m=0,n=0;
+						char **tmp;
             while(strcmp(args[m], "|") != 0)
             {
-							str1 = realloc((m+2)*sizeof(char*));
+							tmp = realloc(str1, (m+2)*sizeof(char*));
+							str1 = tmp;
               str1[m] = args[m];
               m++;
             }
@@ -258,7 +262,8 @@ void shell_execute2(char **args, int argc)
 
             while(strcmp(args[m], "|") != 0)
             {
-							str2 = realloc((n+2)*sizeof(char*));
+							tmp = realloc(str2, (n+2)*sizeof(char*));
+							str2 = tmp;
               str2[n]=args[m];
               n++;m++;
             }
