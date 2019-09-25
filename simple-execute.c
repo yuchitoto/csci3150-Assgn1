@@ -31,7 +31,7 @@ int shell_execute(char ** args, int argc)
 	printf("\n");
 
 	int k=0, j;
-	for(int u=0;u<=i;u++) //tested SIGSEG
+	for(int u=0;u<=i;u++) //detected SIGSEG
 	{
 		//unlimited loop
 		if(strcmp(args[u],"|") == 0 || u==i) //I thought it is just like bool, and forgot it is cmp
@@ -117,7 +117,7 @@ int shell_execute(char ** args, int argc)
 				}
 				for(int me=0;me<=j-k;me++)
 					free(poi[me]);
-				k=i+1;
+				k=u+1;
 				free(poi);
 			}
 			//update index
