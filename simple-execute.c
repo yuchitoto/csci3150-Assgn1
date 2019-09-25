@@ -34,9 +34,6 @@ void shell_execute1(char ** args, int argc)
 	int const stdout_cp = dup(STDOUT_FILENO);
 	int const stdin_cp = dup(STDIN_FILENO);
 
-	if ( strcmp(args[0], "EXIT") == 0 )
-		return -1;
-
 	int i=0;
 	while(args[i]!=NULL)
 	{
@@ -48,10 +45,10 @@ void shell_execute1(char ** args, int argc)
 	printf("%d\n", argc);
 
 	int k=0, j;
-	for(int u=0;u<argc;u++) //detected SIGSEG
+	for(int u=0;u<argc-1;u++) //detected SIGSEG
 	{
-		//unlimited loop
-		if(strcmp(args[u],"|") == 0 || u==argc-1) //if compare a NULL array there will be segmentation fault
+		printf("%s\n",(args[u]==NULL)?"someNULL":args[u]);
+		if(strcmp(args[u],"|") == 0 || u==argc-2) //if compare a NULL array there will be segmentation fault
 		{
 			j=u-1;
 			poi = malloc((j-k+2)*sizeof(char*));
