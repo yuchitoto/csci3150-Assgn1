@@ -62,7 +62,7 @@ void shell_execute1(char ** args, int argc)
 			poi[j+1] = NULL;
 
 			for(int a=0;a<(j-k+2);a++)
-				printf("%s\n",poi[a]);
+				printf("%s\n",(poi[a]==NULL)?"someNULL":poi[a]);
  			//should add poi[me]=NULL;for execvp?becuase it needs a null-terminated
 			if(pipe(p1)<0)
 			{
