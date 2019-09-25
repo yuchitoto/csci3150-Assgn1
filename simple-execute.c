@@ -165,7 +165,7 @@ void shell_execute1(char ** args, int argc)
 
 int shell_execute2(char **args, int argc)
 {
-int counter=0,p1[2],p2[2],count=argc-1,ret;
+int counter=0,p1[2],p2[2],count=argc-1,ret,pid1,pid2;
     char ** poi1;
     char ** poi2;
     char ** poi3;
@@ -193,17 +193,17 @@ int counter=0,p1[2],p2[2],count=argc-1,ret;
 		case 1:
             str1=malloc(MAX_ARG_NUM*sizeof(char*));
             str2=malloc(MAX_ARG_NUM*sizeof(char*));
-            int j=0;
-            while(strcmp(args[j],"|")!=0)
+            int k=0;
+            while(strcmp(args[k],"|")!=0)
             {
-                str1[j]=args[j];
-                j++;
+                str1[k]=args[k];
+                k++;
             }
-            str1[j]=NULL;
-            j++;
-            for(int k=0;j<argc;j++,k++)
+            str1[k]=NULL;
+            k++;
+            for(int l=0;k<argc;l++,k++)
             {
-                str2[k]=args[j];
+                str2[l]=args[k];
             }
             if(pipe(p1)<0)
             {
@@ -242,6 +242,80 @@ int counter=0,p1[2],p2[2],count=argc-1,ret;
             poi1=malloc(MAX_ARG_NUM*sizeof(char*));
             poi2=malloc(MAX_ARG_NUM*sizeof(char*));
             poi3=malloc(MAX_ARG_NUM*sizeof(char*));
+            int m=0,n=0;
+            while(strcmp(args[m],"|")!=0)
+            {
+                poi1[m]=args[m];
+                m++;
+            }
+            poi1[m]=NULL;
+            m++;
+            while(strcmp(args[m],"|")!=0)
+            {
+                poi2[n]=args[m];
+                n++;m++;
+            }
+            poi2[n]=NULL;
+            m++;
+            for(n=0;m<argc;m++,n++)
+            {
+                poi3[n]=args[m];
+            }
+            if(pipe(p1)<0)
+            {
+                printf("fail to pipe\n");
+                exit(-3);
+            }
+            if(pipe(p2)<0)
+            {
+                printf("fail to pipe\n");
+                exit(-3);
+            }
+            pid1=fork();
+            if(pid1==0)
+            {
+                pid2=fork();
+                if(pid2==0)
+                {
+                    //grand child
+                    dup(p1[1]);
+                    close(p1[1]);close(STDOUT_FILENO);//help me check whether close wrong std
+                    close(p1[0]);close(p2[1]);close(p2[0]);
+                    if(execvp(poi1[0],poi1)<0)
+                    {
+                        printf("execvp error\n");
+                        exit(-1);
+                    }
+                }
+                else
+                {
+                    //child
+                    wait(&pid2);
+                    close(p1[1]);
+                    dup(p1[0]);dup(p2[1]);close(STDOUT_FILENO);//help me check whether close wrong
+                    close(STDIN_FILENO);close(p1[0]);close(p2[1]);
+                    close(p2[0]);
+                    if(execvp(poi2[0],poi2)<0)
+                    {
+                        printf("execvp error\n");
+                        exit(-1);
+                    }
+                }
+                
+            }
+            else
+            {
+                //parent
+		//should I wait here?
+		//wait(&sid1);
+                dup(p2[0]);close(STDIN_FILENO);close(p2[0]);//help me check..again
+                close(p2[1]);close(p1[0]);close(p1[1]);
+                if(execvp(poi3[0],poi3)<0)
+                {
+                    printf("execvp error\n");
+                    exit(-1);
+                }
+            }
             free(poi1);
             free(poi2);
             free(poi3);
