@@ -9,7 +9,22 @@
 
 //strcpy to some other array untill | or \0 met
 
+void shell_execute1(char **args, int argc);
+
 int shell_execute(char ** args, int argc)
+{
+	int child_pid, wait_return, status;
+
+	if ( strcmp(args[0], "EXIT") == 0 )
+		return -1;
+
+	shell_execute1(args, argc);
+
+	return 0;
+
+}
+
+void shell_execute1(char ** args, int argc)
 {
 	int child_pid, wait_return, status;
 	int p1[2], p2[2];
@@ -29,6 +44,8 @@ int shell_execute(char ** args, int argc)
 		i++;
 	}
 	printf("\n");
+
+	printf("%d\n", argc);
 
 	int k=0, j;
 	for(int u=0;u<=i;u++) //detected SIGSEG
@@ -149,6 +166,7 @@ int shell_execute(char ** args, int argc)
 	}
 }*/
 
-	return 0;
 
 }
+
+//void shell_execute2(char **args, int argc)
