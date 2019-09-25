@@ -4,7 +4,7 @@
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
-
+#define MAX_ARG_NUM  10 
 #define BUFF_SIZE 65535
 
 //strcpy to some other array untill | or \0 met
