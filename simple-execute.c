@@ -169,4 +169,19 @@ void shell_execute1(char ** args, int argc)
 
 }
 
-//void shell_execute2(char **args, int argc)
+void shell_execute2(char **args, int argc)
+{
+	int counter=0;
+	for(int i=0;i<argc;i++)
+	{
+		counter+=(strcmp(args[i],"|")==0)?1:0;
+	}
+	switch (counter) {
+		case 0:
+		case 1:
+		case 2:
+		default:
+		printf("Input command out of bound!\n");
+		exit(-99);
+	}
+}
