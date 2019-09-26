@@ -118,7 +118,7 @@ void shell_execute1(char ** args, int argc)
 				close(p1[1]);
 
 				write(p1[1],buf,BUFF_SIZE);
-				fsync(p1[1]);
+				fsync(STDOUT_FILENO);
 
 				close(STDOUT_FILENO);
 				dup(stdout_cp);
