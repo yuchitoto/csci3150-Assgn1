@@ -53,6 +53,11 @@ void shell_execute1(char ** args, int argc)
 			}
 			poi[j+1] = NULL;
 
+			for(int me = 0;me<j-k;me++)
+			{
+				printf("%s\n",(poi[me]==NULL)?"someNULL":args[u]);
+			}
+
 			if(pipe(p1)<0)
 			{
 				printf("Create pipe1 error!\n");
