@@ -58,7 +58,7 @@ int main(void)
       if ( (status = shell_execute(cmd_args, argc)) < 0 ){
         break;
       }
-      printf("status: %d\n", status);
+      //printf("status: %d\n", status);
     }
   }
 

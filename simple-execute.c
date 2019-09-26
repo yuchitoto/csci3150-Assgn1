@@ -305,6 +305,9 @@ void shell_execute2(char **args, int argc)
             }
 						//printf("finished third copy\n");
 
+						if((child_pid = fork()) < 0)
+							printf("Fork error\n");
+						else if(child_pid == 0){
             if(pipe(p1)<0)
             {
               printf("Failed to create p1\n");
@@ -383,6 +386,9 @@ void shell_execute2(char **args, int argc)
             free(str1);
             free(str2);
             free(str3);
+					}
+					else if((wait_return = wait(&status)) < 0)
+						printf("wait error\n");
 			break;
 		default:
 		printf("Input command out of bound!\n");
