@@ -36,14 +36,6 @@ void shell_execute1(char ** args, int argc)
 	int const stdout_cp = dup(STDOUT_FILENO);
 	int const stdin_cp = dup(STDIN_FILENO);
 
-	int i=0;
-	while(args[i]!=NULL)
-	{
-		printf("%s ",args[i]);
-		i++;
-	}
-	printf("\n");
-
 	printf("%d\n", argc);
 
 	int k=0, j;
