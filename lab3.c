@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "simple-execute.h"
-#include "simple-shell.h"
+#include "simple-shell2.h"
 
 int main(void)
 {
