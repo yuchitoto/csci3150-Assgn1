@@ -48,7 +48,7 @@ void shell_execute1(char ** args, int argc)
 			poi = malloc((j-k+2)*sizeof(char*));
 			for(int me = 0; me<=j-k; me++)
 			{
-				poi[me] = strdup(args[me+k]);
+				poi[me] = args[me+k];
 			}
 			poi[j+1] = NULL;
 
@@ -86,13 +86,15 @@ void shell_execute1(char ** args, int argc)
 						exit(0);
 				}
 				else
-				{
+				{//ending statement
 					close(p1[1]);
 					close(STDIN_FILENO);
 					dup(p1[0]);
 					close(p1[0]);
 					close(p2[1]);
 					close(p2[0]);
+					close(STDOUT_FILENO);
+					dup(stdout_cp);
 					if(execvp(poi[0],poi)<0)
 					{
 						printf("execvp() error\n");
@@ -113,18 +115,14 @@ void shell_execute1(char ** args, int argc)
 				write(p1[1],buf,BUFF_SIZE);
 				fsync(p1[1]);
 
+				close(STDOUT_FILENO);
 				dup(stdout_cp);
-
-				if(wait_return = wait(&status) < 0)
-					write(stdout_cp,"wait() error\n",13);
 
 				if(u==argc-1)
 				{
 					memset(buf, 0, sizeof(buf));
 					read(p2[0], buf, sizeof(buf));
 				}
-				for(int me=0;me<=j-k;me++)
-					free(poi[me]);
 				k=u+1;
 				free(poi);
 			}
