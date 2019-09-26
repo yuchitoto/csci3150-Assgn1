@@ -167,7 +167,7 @@ void shell_execute1(char ** args, int argc)
 
 void shell_execute2(char **args, int argc)
 {
-	int counter=0,p1[2],p2[2],count=argc-1,ret,pid1,pid2;
+	int counter=0, p1[2], p2[2], count=argc-1, pid1, pid2;
 	int wait_return, status, child_pid;
 	int m, n, k, t;
 	char **tmp;
@@ -219,12 +219,17 @@ void shell_execute2(char **args, int argc)
             }
 						//printf("finished second copy\n");
 
-            if(pipe(p1)<0)
+						if((child_pid=fork()) < 0)
+						{
+							printf("Fork error\n");
+						}
+						else if(child_pid == 0){
+						if(pipe(p1)<0)
             {
                 printf("Fail to create pipe\n");
                 exit(-3);
             }
-            if((ret=fork())>0)
+            if((pid1=fork())>0)
             {//parent
                 close(STDOUT_FILENO);
                 dup(p1[1]);
@@ -236,7 +241,7 @@ void shell_execute2(char **args, int argc)
                     exit(-1);
                 }
             }
-            else if(ret==0)
+            else if(pid1==0)
             {//Child
                 close(STDIN_FILENO);
                 dup(p1[0]);
@@ -255,6 +260,10 @@ void shell_execute2(char **args, int argc)
             }
             free(str1);
             free(str2);
+					}
+					else
+					if((wait_return = wait(&status)) < 0)
+						printf("wait error");
 			break;
 		case 2:
             m=0;
