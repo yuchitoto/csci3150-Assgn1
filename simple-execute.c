@@ -45,13 +45,12 @@ void shell_execute1(char ** args, int argc)
 		printf("%s\n",(args[u]==NULL)?"someNULL":args[u]);
 		if(u==argc-1 || strcmp(args[u],"|") == 0) //SIGSEGV fixed, keep argc-2 would be fine
 		{
-			j=u-1;
-			poi = malloc((j-k+2)*sizeof(char*));
-			for(int me = 0; me<=j-k; me++)
+			poi = malloc((u-k+1)*sizeof(char*));
+			for(int me = 0; me<=u-k; me++)
 			{
 				poi[me] = args[me+k];
 			}
-			poi[j+1] = NULL;
+			poi[u-k] = NULL;
 
 			for(int me = 0;me<j-k;me++)
 			{
