@@ -42,7 +42,7 @@ void shell_execute1(char ** args, int argc)
 	for(int u=0;u<argc;u++) //detected SIGPIPE
 	{
 		printf("%s\n",(args[u]==NULL)?"someNULL":args[u]);
-		if(strcmp(args[u],"|") == 0 || u==argc-2) //SIGSEGV fixed, keep argc-2 would be fine
+		if(u==argc-1 || strcmp(args[u],"|") == 0) //SIGSEGV fixed, keep argc-2 would be fine
 		{
 			j=u-1;
 			poi = malloc((j-k+2)*sizeof(char*));
