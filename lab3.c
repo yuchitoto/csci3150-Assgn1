@@ -12,6 +12,6 @@ int main(void)
 		"wc\0","-l",
 		NULL
 	};
-	int status = shell_execute(args,9);
+	int status = shell_execute(args,8);
 	return 0;
 }
