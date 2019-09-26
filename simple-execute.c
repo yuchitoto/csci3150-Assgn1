@@ -118,7 +118,7 @@ void shell_execute1(char ** args, int argc)
 				if(wait_return = wait(&status) < 0)
 					write(stdout_cp,"wait() error\n",13);
 
-				if(args[i+1]!=NULL)
+				if(u==argc-1)
 				{
 					memset(buf, 0, sizeof(buf));
 					read(p2[0], buf, sizeof(buf));
