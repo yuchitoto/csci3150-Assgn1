@@ -20,7 +20,7 @@ int shell_execute(char ** args, int argc)
 	if ( strcmp(args[0], "EXIT") == 0 )
 		return -1;
 
-	shell_execute2(args, argc);
+	shell_execute1(args, argc);
 
 	return 0;
 
@@ -28,7 +28,7 @@ int shell_execute(char ** args, int argc)
 
 void shell_execute1(char ** args, int argc)
 {
-	int child_pid, wait_return, status;
+	int child_pid, wait_return, status, pid1, pid2;
 	int p1[2], p2[2];
 	char **poi;
 	char buf[BUFF_SIZE] = {0};
