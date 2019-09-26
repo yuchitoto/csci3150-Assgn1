@@ -7,7 +7,7 @@
 
 
 
-#define MAX_LINE_SIZE 1024   //the maximum bytes of an inputted command line 
+#define MAX_LINE_SIZE 1024   //the maximum bytes of an inputted command line
 #define MAX_ARG_NUM  10    //the maximum number of arguments in a command line
 
 int shell_read_line(char *);
@@ -55,10 +55,12 @@ int main(void)
         continue;
       }
 
-      if ( (status = shell_execute(cmd_args, argc)) < 0 )
+      if ( (status = shell_execute(cmd_args, argc)) < 0 ){
+        printf("status: %d\n", status);
         break;
+      }
     }
-  }     
+  }
 
   free(cmd_line);
   free(cmd_args);
@@ -83,12 +85,12 @@ int shell_read_line(char * cmd_buf)
       cmd_buf[position] = c;
       position++;
 
-      //if too big, warning and return -1 
+      //if too big, warning and return -1
       if (position >= MAX_LINE_SIZE) {
         printf("The command size is too big\n");
         return -1;
       }
-    }   
+    }
   }
 }
 
@@ -119,7 +121,7 @@ int get_line_args(char * line, char ** args)
     }else{
       end_position = start_position;
 
-      //Move end_position to the end of the argument 
+      //Move end_position to the end of the argument
       while (1){
         end_position++;
         c= line[end_position];
@@ -128,12 +130,12 @@ int get_line_args(char * line, char ** args)
       }
 
 
-      if( c != '\0'){ 
+      if( c != '\0'){
         line[end_position] = '\0';
         end_position++;
       }
 
-      args[argc] = & line[start_position];  
+      args[argc] = & line[start_position];
       argc ++;
 
       start_position = end_position;
