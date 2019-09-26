@@ -39,7 +39,7 @@ void shell_execute1(char ** args, int argc)
 	printf("%d\n", argc);
 
 	int k=0, j;
-	for(int u=0;u<argc-1;u++) //detected SIGPIPE
+	for(int u=0;u<argc;u++) //detected SIGPIPE
 	{
 		printf("%s\n",(args[u]==NULL)?"someNULL":args[u]);
 		if(strcmp(args[u],"|") == 0 || u==argc-2) //SIGSEGV fixed, keep argc-2 would be fine
