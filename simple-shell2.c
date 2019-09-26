@@ -12,7 +12,6 @@
 
 int shell_read_line(char *);
 int get_line_args(char *, char **);
-int shell_execute(char **, int);
 
 int shell_read_line(char * cmd_buf)
 {
