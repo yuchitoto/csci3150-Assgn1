@@ -196,12 +196,17 @@ void shell_execute2(char **args, int argc)
 			break;
 		case 1:
 						k=0;
+						tmp = malloc(MAX_ARG_NUM*sizeof(char*));
 						while(strcmp(args[k], "|") != 0)
 						{
-							tmp = realloc(str1, (k+2)*sizeof(char*));
-							str1 = tmp;
-							str1[k] = args[k];
+							tmp[k] = args[k];
 							k++;
+						}
+						str1 = malloc(k*sizeof(char*));
+						for(int i=0;i<k;i++)
+						{
+							str1[i] = args[i];
+							printf("%s\n", (args[i]!=NULL)?args[i]:"someNULL");
 						}
             str1[k]=NULL;
 						printf("finished first copy\n");
