@@ -1,7 +1,9 @@
-# This is the repo for 2019 sem1 csci3150 assignment 1 in cuhk.
-## The master branch is the finished product using hardcode technique.
-## The test branch is trying to implement loop technique to finish the assignment in a more natural way.
-## The fix branch is to fix the instability of program in master branch
+# CUHK CSCI3150 2019 SEM1 ASSGN1
+**The master branch is the finished product using hardcode technique.**
+
+**The test branch is trying to implement loop technique to finish the assignment in a more natural way.**
+
+**The fix branch is to fix the instability of program in master branch**
 
 Readme provided from lecturer below
 -----------------------------------------------------------------------------------------------------------
@@ -10,6 +12,7 @@ Readme provided from lecturer below
   make
 
 Then you can run it:
+
   ./SimpleShell
 
 
@@ -23,10 +26,15 @@ Then you can run it:
 (3) At least, your shell program should be able to correctly execute the following commands:
 
 $$$ ls
+
 $$$ ps
+
 $$$ ls -l
+
 $$$ ps -al
+
 $$$ ls -l | wc -l
+
 $$$ ls -l | grep D | wc -l
 
 
